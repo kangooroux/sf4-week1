@@ -23,7 +23,12 @@ On écrase la valeur d'un bloc
 
     {# équivalent foreach($a as $b) #}
     {% for unit in units %}
-    <p>{{ unit }}</p>
+    <p>{{ unit|upper }}</p>
     {% endfor %}
+
+    {# Tests: si variable est définie #}
+    {% if battle_ready is defined %}
+    <a href="">Fight!</a>
+    {% endif %}
 
 {% endblock %}

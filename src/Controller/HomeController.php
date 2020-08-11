@@ -20,7 +20,8 @@ class HomeController extends AbstractController
             'army' => 'Space Marine',
             'army2' => 'Chaos',
             'boolean' => true,
-            'units' => ['HQ', 'Troops', 'Elites', 'Fast Attack', 'Heavy Support']
+            'units' => ['HQ', 'Troops', 'Elites', 'Fast Attack', 'Heavy Support'],
+
         ]);
     }
     
