@@ -10,6 +10,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
+     * Page d'accueil
+     * @Route("/", name="homepage")
+     */
+    public function homepage()
+    {
+        //Afficher le template twig home.html.twig
+        return $this->render('home.html.twig', [
+            'army' => 'Space Marine',
+            'army2' => 'Chaos',
+            'boolean' => true,
+            'units' => ['HQ', 'Troops', 'Elites', 'Fast Attack', 'Heavy Support']
+        ]);
+    }
+    
+    /**
      * @param int $id
      * @Route("/home/{id<\d+>}", name="home")
      */

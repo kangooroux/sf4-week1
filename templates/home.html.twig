@@ -1,0 +1,29 @@
+{#
+    Ce tetmplate va hériter de base.html.twig
+    Il va hériter de sa structure et on pouura remplacer le contenu de ses blocks
+#}
+{% extends "base.html.twig" %}
+
+{#
+On écrase la valeur d'un bloc
+#}
+
+{% block body %}
+    <h1>Accueil</h1>
+
+    {# Affichage d'une variable  #}
+    <p>{{ army }}</p>
+    <p>{{ army2 }}</p>
+
+    {% if boolean %}
+    <p>Le booléen est true</p>
+    {% else %}
+    <p>Le booléen n'est pas true</p>
+    {% endif %}
+
+    {# équivalent foreach($a as $b) #}
+    {% for unit in units %}
+    <p>{{ unit }}</p>
+    {% endfor %}
+
+{% endblock %}
