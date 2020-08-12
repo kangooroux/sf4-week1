@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Produit;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -40,5 +42,40 @@ class HomeController extends AbstractController
             'get' => $request->query->get('nuke', 'default') ,
             'session' => get_class($session),
         ]);
+    }
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function test(EntityManagerInterface $em)
+    {
+        // Création d'une instance de Produit
+        $produit = new Produit();
+        dump($produit);
+
+        //Methode-chaining
+        $produit
+            ->setNom('Jeans')
+            ->setDescription('De couleur bleu')
+            ->setPrix('29.99')
+            ->setQuantite(10)
+        ;
+        dump($produit);
+
+        //insertion en base
+        $em->persist($produit); // on prépare l'insertion
+        $em->flush(); // on enregistre en base
+        dump($produit);
+
+        //modification
+        $produit->setDescription(null);
+        $em->flush();
+        dump($produit);
+
+        //suppression
+
+        $em->remove($produit); // on prépare à la supression
+        $em->flush();
+        dd($produit);
     }
 }
