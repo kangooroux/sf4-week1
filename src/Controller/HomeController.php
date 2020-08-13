@@ -35,23 +35,12 @@ class HomeController extends AbstractController
         //Essaie de récupérer une entité qui n'éxiste pas
         $find999 = $produitRepository->find(999);
 
-
-        dump($findAll);
-        dump($findBy);
-        dump($findOneBy);
-        dump($find42);
-        dump($find999);
-
-
-
-
-        dd($produitRepository);
         //Afficher le template twig home.html.twig
         return $this->render('home.html.twig', [
-            'army' => 'Space Marine',
-            'army2' => 'Chaos',
-            'boolean' => true,
-            'units' => ['HQ', 'Troops', 'Elites', 'Fast Attack', 'Heavy Support'],
+            'produits' => $findAll,
+            'produits_sans_description' => $findBy,
+            'produit_par_critère' => $findOneBy,
+            'produit_par_id' => $find42,
 
         ]);
     }

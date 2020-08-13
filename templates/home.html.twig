@@ -11,24 +11,16 @@ On écrase la valeur d'un bloc
 {% block body %}
     <h1>Accueil</h1>
 
-    {# Affichage d'une variable  #}
-    <p>{{ army }}</p>
-    <p>{{ army2 }}</p>
+    <p>
+        Nombre de produits : {{ produits|length }}
+    </p>
 
-    {% if boolean %}
-    <p>Le booléen est true</p>
-    {% else %}
-    <p>Le booléen n'est pas true</p>
-    {% endif %}
+    <p>
+        Nombre de produits sans desciption: {{ produits_sans_description|length }}
+    </p>
 
-    {# équivalent foreach($a as $b) #}
-    {% for unit in units %}
-    <p>{{ unit|upper }}</p>
-    {% endfor %}
-
-    {# Tests: si variable est définie #}
-    {% if battle_ready is defined %}
-    <a href="">Fight!</a>
-    {% endif %}
+    <p>
+        Produit sans description avec le plus petit stock : {{ produit_par_critère.nom }}
+    </p>
 
 {% endblock %}
