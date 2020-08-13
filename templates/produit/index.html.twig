@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+    <h1>Produits : {{ liste_produits|length }}</h1>
+    <a href="#" class="btn btn-info">Nouveau produit</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Quantite</th>
+                <th class="text-right">Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in liste_produits %}
+            <tr>
+                <th>{{ produit.id }}</th>
+                <td>{{ produit.nom }}</td>
+                <td>{{ produit.description|slice(0, 20) }}...</td>
+                <td>{{ produit.quantite }}</td>
+                <td class="text-right">{{ produit.prix }} €</td>
+                <td>
+                    <a href="#" class="btn btn-success">Modifier</a>
+                    <a href="#" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
