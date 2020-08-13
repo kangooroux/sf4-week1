@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,8 +16,36 @@ class HomeController extends AbstractController
      * Page d'accueil
      * @Route("/", name="homepage")
      */
-    public function homepage()
+    public function homepage(ProduitRepository $produitRepository)
     {
+        // Action                                       méthode         si résultats    si aucun résultat
+        // Récupérer toutes les entités                 findAll()       array           array (vide)
+        // Récupérer des entités selon des critères     findBy()        array           array (vide)
+        // Récupérer 1 entité selon des critères        findOneBy()     object          null
+        // Récupérer 1 entité selon son ID              find()          object          null
+
+        //Récupère toutes les entités  //findAll()
+        $findAll = $produitRepository->findAll();
+        //Récupère des entités selon des crittères  //findBy()
+        $findBy = $produitRepository->findBy(['description' => null],['quantite' => 'DESC']);
+        //Récupère une entité selon des critères  //findOneBy()
+        $findOneBy = $produitRepository->findOneBy(['description' => null],['quantite' => 'ASC']);
+        //Récupère une entité selon son id  //find()
+        $find42 = $produitRepository->find(42);
+        //Essaie de récupérer une entité qui n'éxiste pas
+        $find999 = $produitRepository->find(999);
+
+
+        dump($findAll);
+        dump($findBy);
+        dump($findOneBy);
+        dump($find42);
+        dump($find999);
+
+
+
+
+        dd($produitRepository);
         //Afficher le template twig home.html.twig
         return $this->render('home.html.twig', [
             'army' => 'Space Marine',
