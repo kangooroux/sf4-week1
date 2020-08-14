@@ -4,7 +4,12 @@
 
 {% block body %}
     <h1>Produits : {{ liste_produits|length }}</h1>
-    <a href="#" class="btn btn-info">Nouveau produit</a>
+
+    {# Inclusion du fichier des messages flash #}
+    {% include 'include/nouveau_produit_flash.html.twig' %}
+
+
+    <a href="{{ path('produit_ajout') }}" class="btn btn-info">Nouveau produit</a>
     <table class="table">
         <thead>
             <tr>
