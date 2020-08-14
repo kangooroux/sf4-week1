@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Produit;
 use App\Form\ProduitFormType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +31,7 @@ class ProduitController extends AbstractController
     }
 
     /**
+     * Ajout d'un produit
      * @Route("/ajout", name="ajout")
      */
     public function ajout(Request $request, EntityManagerInterface $entityManager)
@@ -55,6 +58,32 @@ class ProduitController extends AbstractController
 
 
         return $this->render('produit/ajout.html.twig', [
+            'produit_form' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     * Ajout d'un produit
+     * @Route("/{id}/modifier", name="modif")
+     * Le composant ParamConverter va convertir le paramètre id en l'entité associée
+     *
+     */
+    public function modification(Produit $produit, Request $request, EntityManagerInterface $entityManager)
+    {
+        // On passe l'entité à modifier en 2me argument (arg. "data") pour que l'objet soit directement apporté dans le formulaire puis modifié
+        $form = $this->createForm(ProduitFormType::class, $produit);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // il n'est pas nécessaire de récupéré les données du formulaire: l'entité a été modifiée par celui-ci
+            // On apppele pas non plus $entityManager->persist() car Doctrine connaît dèjà l'existence de l'entité
+            $entityManager->flush();
+            $this->addFlash('success', 'le produit a été mis à jour !');
+        }
+
+        return $this->render('produit/modif.html.twig', [
+            'produit' => $produit,
             'produit_form' => $form->createView(),
         ]);
     }

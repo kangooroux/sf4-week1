@@ -6,7 +6,7 @@
     <h1>Produits : {{ liste_produits|length }}</h1>
 
     {# Inclusion du fichier des messages flash #}
-    {% include 'include/nouveau_produit_flash.html.twig' %}
+    {% include 'include/produit_flash.html.twig' %}
 
 
     <a href="{{ path('produit_ajout') }}" class="btn btn-info">Nouveau produit</a>
@@ -29,7 +29,7 @@
                 <td>{{ produit.quantite }}</td>
                 <td class="text-right">{{ produit.prix }} €</td>
                 <td>
-                    <a href="#" class="btn btn-success">Modifier</a>
+                    <a href="{{ path('produit_modif', {id: produit.id }) }}" class="btn btn-success">Modifier</a>
                     <a href="#" class="btn btn-danger">Supprimer</a>
                 </td>
             </tr>

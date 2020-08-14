@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modification du produit{% endblock %}
+
+{% block body %}
+    <h1>Modification de {{ produit.nom }}</h1>
+
+    {# Inclusion du fichier des messages flash #}
+    {% include 'include/produit_flash.html.twig' %}
+
+    {# Template twig du formulaire #}
+    {% include 'produit/_produit_form.html.twig' %}
+{% endblock %}

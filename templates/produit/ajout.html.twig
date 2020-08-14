@@ -5,14 +5,6 @@
 {% block body %}
     <h1>Ajout de produit</h1>
 
-    {{ form_start(produit_form) }}
-        {{ form_row(produit_form.nom, {label: "Nom du produit :"}) }}
-        {{ form_row(produit_form.description, {
-            label: "Description :",
-            help: "Ce champ est facultatif",
-        }) }}
-        {{ form_row(produit_form.quantite, {label: "Quantité :"}) }}
-        {{ form_row(produit_form.prix, {label: "Prix (en euros) :"}) }}
-        <button type="submit" class="btn btn-success btn-block">Ajouter</button>
-    {{ form_end(produit_form) }}
+    {# Template twig du formulaire #}
+    {% include 'produit/_produit_form.html.twig' %}
 {% endblock %}
