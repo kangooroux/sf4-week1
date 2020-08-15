@@ -64,7 +64,7 @@ class ProduitController extends AbstractController
 
 
     /**
-     * Ajout d'un produit
+     * Modification d'un produit
      * @Route("/{id}/modifier", name="modif")
      * Le composant ParamConverter va convertir le paramètre id en l'entité associée
      *
@@ -79,12 +79,29 @@ class ProduitController extends AbstractController
             // il n'est pas nécessaire de récupéré les données du formulaire: l'entité a été modifiée par celui-ci
             // On apppele pas non plus $entityManager->persist() car Doctrine connaît dèjà l'existence de l'entité
             $entityManager->flush();
-            $this->addFlash('success', 'le produit a été mis à jour !');
+            $this->addFlash('primary', 'Le produit a été mis à jour !');
         }
 
         return $this->render('produit/modif.html.twig', [
             'produit' => $produit,
             'produit_form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * Suppression d'un produit
+     * @Route("/{id}/supprimer", name="supprimer")
+     * Le composant ParamConverter va convertir le paramètre id en l'entité associée
+     *
+     */
+    public function supression(Produit $produit, Request $request, EntityManagerInterface $entityManager)
+    {
+        //supression
+        $entityManager->remove($produit);
+        $entityManager->flush();
+
+        //Message et rédirection
+        $this->addFlash('danger', 'Le produit a bien été supprimé');
+        return $this->redirectToRoute('produit_list');
     }
 }

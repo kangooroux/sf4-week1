@@ -13,12 +13,8 @@
         ]
 #}
 
-<div style="background-color: greenyellow">
-
     {% for type, liste_messages in app.flashes() %}
         {% for message in liste_messages %}
             <div class="alert alert-{{ type }}">{{ message }}</div>
         {% endfor %}
     {% endfor %}
-
-</div>

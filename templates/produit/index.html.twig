@@ -30,7 +30,7 @@
                 <td class="text-right">{{ produit.prix }} €</td>
                 <td>
                     <a href="{{ path('produit_modif', {id: produit.id }) }}" class="btn btn-success">Modifier</a>
-                    <a href="#" class="btn btn-danger">Supprimer</a>
+                    <a href="{{ path('produit_supprimer', {id: produit.id }) }}" class="btn btn-danger">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}
